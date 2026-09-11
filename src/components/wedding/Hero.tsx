@@ -1,0 +1,143 @@
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
+const heroArch = "https://media.invitestory.in/sage-parchment/src/assets/hero-arch.jpg";
+import { invitation } from "@/config/invitation";
+import { AuroraBackdrop } from "./AuroraBackdrop";
+import { useOpened } from "./OpenGate";
+
+export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  const { couple, invite, event, venue } = invitation;
+  const opened = useOpened();
+
+  return (
+    <section
+      ref={ref}
+      className="relative flex min-h-[100svh] flex-col items-center justify-between overflow-hidden bg-parchment"
+    >
+      <AuroraBackdrop />
+
+      <motion.div style={{ y: imgY }} className="absolute -top-10 inset-x-0 bottom-0">
+        <img
+          src={heroArch}
+          alt="Illustrated Mughal arch with an Indian bride and groom surrounded by lotus flowers"
+          width={1024}
+          height={1536}
+          className="h-full w-full object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-pine/25 via-transparent via-40% to-parchment" />
+      </motion.div>
+
+      {/* Fixed bottom gradient to guarantee seamless transition to next section */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-72 bg-gradient-to-t from-parchment via-parchment/95 via-60% to-transparent" />
+
+      <motion.div
+        style={{ y: textY }}
+        className="relative z-20 mt-auto w-full px-5 pt-20 pb-8 text-center"
+      >
+        {/* Sacred Shloka Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={opened ? { opacity: 1, y: 0 } : false}
+          transition={{ duration: 1, delay: 0.15 }}
+          className="mx-auto mb-5 max-w-sm rounded-2xl border border-gold/40 bg-parchment/80 p-3.5 shadow-sm backdrop-blur-xs"
+        >
+          <p className="font-serif text-sm font-semibold tracking-widest text-pine">
+            {invitation.shloka.title}
+          </p>
+          <p className="mt-1 font-serif text-xs md:text-sm leading-relaxed text-ink/90 whitespace-pre-line">
+            {invitation.shloka.verse}
+          </p>
+        </motion.div>
+
+        {/* Invitation from Grandparents */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={opened ? { opacity: 1 } : false}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="mx-auto max-w-md"
+        >
+          <p className="text-[0.62rem] tracking-[0.35em] text-gold uppercase font-medium">
+            With the divine blessings of Lord Ganesha
+          </p>
+          <p className="mt-1 font-display text-lg tracking-wider text-pine">
+            {invitation.inviteFrom.elders}
+          </p>
+          <p className="text-[0.6rem] tracking-[0.2em] text-ink/70 uppercase">
+            request the pleasure of your company at the wedding of their granddaughter
+          </p>
+        </motion.div>
+
+        {/* Couple Names */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24, letterSpacing: "0.3em" }}
+          animate={opened ? { opacity: 1, y: 0, letterSpacing: "0.14em" } : false}
+          transition={{ duration: 1.4, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto mt-5 max-w-md text-3xl leading-tight font-light text-pine uppercase sm:text-5xl"
+        >
+          {couple.brideShort}
+          <span className="mx-2.5 inline-block font-display text-xl lowercase italic text-gold">
+            weds
+          </span>
+          {couple.groomShort}
+        </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.4 }}
+          animate={opened ? { opacity: 1, scaleX: 1 } : false}
+          transition={{ duration: 1.2, delay: 0.7 }}
+          className="mx-auto mt-4 w-44 gold-rule"
+        />
+
+        {/* Parents Information Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={opened ? { opacity: 1, y: 0 } : false}
+          transition={{ duration: 1, delay: 0.85 }}
+          className="mx-auto mt-4 max-w-lg grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-ink/80"
+        >
+          <div className="rounded-xl border border-gold/30 bg-parchment-deep/40 p-2.5">
+            <span className="block text-[0.58rem] tracking-[0.2em] text-gold uppercase font-semibold">Bride's Parents</span>
+            <span className="block font-medium mt-0.5 text-pine">{couple.brideParents}</span>
+          </div>
+          <div className="rounded-xl border border-gold/30 bg-parchment-deep/40 p-2.5">
+            <span className="block text-[0.58rem] tracking-[0.2em] text-gold uppercase font-semibold">Groom's Parents</span>
+            <span className="block font-medium mt-0.5 text-pine">{couple.groomParents}</span>
+          </div>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={opened ? { opacity: 1 } : false}
+          transition={{ duration: 1, delay: 1 }}
+          className="mt-5 font-display text-2xl tracking-[0.16em] text-gold sm:text-3xl"
+        >
+          {event.dateLabel}
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={opened ? { opacity: 1 } : false}
+          transition={{ duration: 1, delay: 1.15 }}
+          className="mt-1 text-[0.68rem] tracking-[0.24em] text-ink/70 uppercase"
+        >
+          {venue.name} • {venue.address}
+        </motion.p>
+      </motion.div>
+
+      <motion.div style={{ opacity: fade }} className="relative z-20 pb-6 text-center">
+        <span className="text-[0.6rem] tracking-[0.3em] text-ink/60 uppercase">scroll</span>
+        <motion.div
+          animate={{ scaleY: [0.2, 1, 0.2], originY: 0 }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          className="mx-auto mt-2 h-8 w-px bg-gold"
+        />
+      </motion.div>
+    </section>
+  );
+}
