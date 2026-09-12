@@ -31,11 +31,11 @@ export const invitation = {
   event: {
     title: "Wedding Ceremony of Sonali & Abhishek",
     /** ISO with timezone offset — India Standard Time */
-    startsAt: "2026-11-02T10:00:00+05:30",
+    startsAt: "2026-11-03T11:00:00+05:30",
     endsAt: "2026-11-04T12:00:00+05:30",
-    dateLabel: "02 . 11 . 2026 – 04 . 11 . 2026",
-    dayLabel: "Monday – Wednesday",
-    timeLabel: "2nd to 4th November 2026",
+    dateLabel: "3rd November 2026",
+    dayLabel: "Tuesday",
+    timeLabel: "3rd November 2026",
     dressCode: "Traditional Indian / Festive Splendour",
     note: "Your presence and warm blessings are our greatest gift",
   },
@@ -98,9 +98,9 @@ export const invitation = {
   },
   meta: {
     title: "Sonali & Abhishek — Wedding Invitation",
-    description: "Wedding Ceremony of Sonali and Abhishek. Join us in celebrating our wedding rituals from 2nd to 4th November 2026 at Vill. Kuranwala, Baddi, Solan (H.P.).",
-    url: "https://sonali-abhishek-wedding.vercel.app",
-    image: "/og-image.jpg",
+    description: "Wedding Ceremony of Sonali and Abhishek on Tuesday, 3rd November 2026 at Vill. Kuranwala, Baddi, Solan (H.P.). Join us in celebrating our auspicious union.",
+    url: "https://sonali-weds-abhishek.vercel.app",
+    image: "https://sonali-weds-abhishek.vercel.app/og-image.jpg",
     siteName: "Sonali & Abhishek Wedding",
   },
 } as const;

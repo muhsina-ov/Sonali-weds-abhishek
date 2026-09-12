@@ -162,7 +162,7 @@ function Opener({ opened, onOpen }: { opened: boolean; onOpen: () => void }) {
           transition={{ duration: 1, delay: 0.95 }}
           className="mt-2 font-display text-sm tracking-[0.25em] text-parchment/90"
         >
-          2nd – 4th November 2026
+          {event.timeLabel}
         </motion.p>
 
         <motion.button
