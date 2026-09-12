@@ -98,9 +98,9 @@ export const invitation = {
   },
   meta: {
     title: "Sonali & Abhishek — Wedding Invitation",
-    description: "Wedding Ceremony of Sonali and Abhishek on Tuesday, 3rd November 2026 at Vill. Kuranwala, Baddi, Solan (H.P.). Join us in celebrating our auspicious union.",
-    url: "https://sonali-weds-abhishek.vercel.app",
-    image: "https://sonali-weds-abhishek.vercel.app/og-image.jpg",
+    description: "Wedding celebration of Sonali & Abhishek on 3rd November 2026 at Vill. Kuranwala, Baddi, Solan (H.P.).",
+    url: "https://sonali-weds-abhishek.invitingyou.top",
+    image: "https://sonali-weds-abhishek.invitingyou.top/og-image.jpg",
     siteName: "Sonali & Abhishek Wedding",
   },
 } as const;
